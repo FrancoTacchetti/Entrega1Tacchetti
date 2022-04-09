@@ -1,7 +1,7 @@
 import uuid
 from django.db import models
 
-class RentUsers(models.Model):
+class Tenant(models.Model):
     PAID_CHOICES = (
         ("Cash", "Cash"),
         ("Credit/Debit Card", "Credit/Debit Card"),
