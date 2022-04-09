@@ -82,7 +82,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "entrega1tacchetti.users",
     # Your stuff: custom apps go here
-    "entrega1tacchetti.rentapp"
+    "entrega1tacchetti.rentapp.apps.RentsConfig"
 
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
