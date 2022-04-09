@@ -48,9 +48,9 @@
               <h3>Registration Bar</h3>
               <p class='text-muted'>Select what you want to create
                 <ul class="list-group">
-                  <li class="list-group-item list-group-item-light"><a href="/">Create Users</a></li>
-                  <li class="list-group-item list-group-item-light"><a href="/">Create Rentable Place</a></li>
-                  <li class="list-group-item list-group-item-light"><a href="/">Create Rentable Car</a></li>
+                  <li class="list-group-item list-group-item-light"><a href="{% url 'tenant-create' %}">Create Tenant</a></li>
+                  <li class="list-group-item list-group-item-light"><a href="{% url 'rentable-place-create' %}">Create Rentable Place</a></li>
+                  <li class="list-group-item list-group-item-light"><a href="{% url 'rentable-car-create' %}">Create Rentable Car</a></li>
                 </ul>
               </p>
             </div>

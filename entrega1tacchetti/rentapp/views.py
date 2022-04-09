@@ -4,7 +4,7 @@ from django.views.generic import (
     TemplateView,
     ListView, 
     CreateView)
-from .models import (
+from rentapp.models import (
     Tenant, 
     RentCar, 
     RentPlace)
@@ -24,7 +24,11 @@ class TenantCreateView(CreateView):
             "paid_method",
             "rent_from",
             "rent_to",
-        ]
+    ]
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page_name"] = "Tenant"
+        return context
 
 class RentPlaceCreateView(CreateView):
     model = RentPlace
@@ -36,6 +40,10 @@ class RentPlaceCreateView(CreateView):
             "price",
             "capacity",
     ]
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page_name"] = "Rentable Place"
+        return context
 
 class RentCarCreateView(CreateView):
     model = RentCar
@@ -44,7 +52,11 @@ class RentCarCreateView(CreateView):
             "price",
             "model_year",
             "car_insurance",
-        ]
+    ]
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page_name"] = "Rentable Car"
+        return context
 
 
 
