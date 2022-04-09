@@ -44,7 +44,7 @@ LOCALE_PATHS = [str(ROOT_DIR / "locale")]
 DATABASES = {
     "default": env.db(
         "DATABASE_URL",
-        default="postgres://localhost/entrega1tacchetti",
+        default="postgres://msyjwdnv:MbiAAHWjPpIc5UPOX4sxDNXagrw_djMx@raja.db.elephantsql.com/msyjwdnv",
     ),
 }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
@@ -82,6 +82,8 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "entrega1tacchetti.users",
     # Your stuff: custom apps go here
+    "entrega1tacchetti.rentapp"
+
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
