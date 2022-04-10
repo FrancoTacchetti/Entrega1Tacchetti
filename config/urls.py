@@ -7,7 +7,10 @@ from django.views.generic import TemplateView
 from entrega1tacchetti.rentapp.views import (
     TenantCreateView, 
     RentCarCreateView, 
-    RentPlaceCreateView)
+    RentPlaceCreateView,
+    TenantDetailView,
+    PlaceDetailView,
+    CarDetailView)
 
 urlpatterns = [
     path("", TemplateView.as_view(template_name="rentapp/base.html"), name="home"),
@@ -18,9 +21,16 @@ urlpatterns = [
     path("users/", include("entrega1tacchetti.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
-    path( "tenant/new", TenantCreateView.as_view(template_name="rentapp/create_form.html"), name="tenant-create"),
-    path( "place/new", RentPlaceCreateView.as_view(template_name="rentapp/create_form.html"), name="rentable-place-create"),
-    path( "car/new", RentCarCreateView.as_view(template_name="rentapp/create_form.html"), name="rentable-car-create"),
+    
+    #Creation Forms Views
+    path( "tenant/new", TenantCreateView.as_view(), name="tenant-create"),
+    path( "place/new", RentPlaceCreateView.as_view(), name="rentable-place-create"),
+    path( "car/new", RentCarCreateView.as_view(), name="rentable-car-create"),
+    
+    #Created Objects Views
+    path( "tenant/<str:pk>/created", TenantDetailView.as_view(), name="tenant-cretion-detail"),
+    path( "place/<str:pk>/created", PlaceDetailView.as_view(), name="place-cretion-detail"),
+    path( "car/<str:pk>/created", CarDetailView.as_view(), name="car-cretion-detail"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
