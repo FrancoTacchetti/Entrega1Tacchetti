@@ -113,10 +113,12 @@ def search(request):
                     if results.exists():
                         query = results
                         context["query"] = query
+                        context["no_results"] = False
                         break
-                        # query = f"No Available Results For {search}"
-                        # context["query"] = query
-                        # context["no_results"] = True
+                    else:
+                        query = f"No Available Results For {search}"
+                        context["query"] = query
+                        context["no_results"] = True
             except:
                 return render (request, template_name="500.html")
             print(context)
