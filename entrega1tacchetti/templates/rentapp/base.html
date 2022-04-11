@@ -30,10 +30,17 @@
                 <a class="nav-item nav-link" href="{% url 'about' %}">About</a>
               </div>
               <!-- Navbar Right Side -->
-              <!-- <div class="navbar-nav">
-                <a class="nav-item nav-link" href="#">Login</a>
-                <a class="nav-item nav-link" href="#">Register</a>
-              </div> -->
+              <div class="navbar-nav">
+                <form class="d-flex" method=POST action="{% url 'search-results' %}">
+
+                  {% csrf_token %}
+
+                  <input class="form-control me-2" type="search" aria-label="Search" placeholder="Search For ..." name="search">
+                  <button class="btn btn-outline-terciary" type="submit">Search</button> 
+
+
+                </form>
+              </div>
             </div>
           </div>
         </nav>

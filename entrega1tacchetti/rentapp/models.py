@@ -27,7 +27,7 @@ class Tenant(models.Model):
 class RentCar(models.Model):
     car_model = models.CharField(max_length=40)
     price = models.DecimalField(max_digits=8, decimal_places=2)
-    model_year = models.IntegerField()
+    model_year = models.PositiveIntegerField()
     car_insurance = models.BooleanField()
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     date = models.DateTimeField(default=timezone.now, blank=True)

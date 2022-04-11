@@ -1,0 +1,16 @@
+{% extends "rentapp/base.html" %}
+{% block content %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <small class="text-muted">{{ object.date|date:"F d, Y" }}</small>
+            </div>
+            <h2 class="article-title">{{ page_name }} - {{ object.location }}</h2>
+            <p class="article-content">Rooms = {{ object.rooms }}</p>
+            <p class="article-content">Bathrooms = {{ object.bathrooms }}</p>
+            <p class="article-content">Garage = {{ object.garage }}</p>
+            <p class="article-content">Price = {{ object.price }}</p>
+            <p class="article-content">Capacity = {{ object.capacity }}</p>
+          </div>
+        </article>
+{% endblock content %}
