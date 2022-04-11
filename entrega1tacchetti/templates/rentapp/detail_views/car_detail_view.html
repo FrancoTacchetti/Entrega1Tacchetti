@@ -3,9 +3,9 @@
         <article class="media content-section">
           <div class="media-body">
             <div class="article-metadata">
-              <small class="text-muted">{{ object.date|date:"F d, Y" }}</small>
+              <small class="text-muted">{{ page_name }} created on: {{ object.date|date:"F d, Y G:i " }}</small>
             </div>
-            <h2 class="article-title">{{ page_name }} - {{ object.Model }}</h2>
+            <h2 class="article-title">{{ page_name }} - {{ object.car_model }}</h2>
             <p class="article-content">Car Price = {{ object.price }}</p>
             <p class="article-content">Car Model Year = {{ object.model_year }}</p>
             <p class="article-content">Car Insurance = {{ object.car_insurance }}</p>      
