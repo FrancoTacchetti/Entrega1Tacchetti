@@ -121,6 +121,6 @@ def search(request):
             except:
                 return render (request, template_name="500.html")
             print(context)
-            return render(request,"rentapp/search_results.html", context=context)
+        return render(request,"rentapp/search_results.html", context=context)
 
 

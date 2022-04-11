@@ -11,7 +11,6 @@ from entrega1tacchetti.rentapp.views import (
     TenantDetailView,
     PlaceDetailView,
     CarDetailView,
-    # SearchResults,
     search)
 
 urlpatterns = [
