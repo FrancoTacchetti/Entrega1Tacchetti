@@ -79,31 +79,30 @@ class PlaceDetailView(DetailView,RentPlaceCreateView):
     model = RentPlace
 
 class CarDetailView(DetailView,RentCarCreateView):
-    template_name ="rentapp/detail_views/car_detail_view.html"
+    template_name = "rentapp/detail_views/car_detail_view.html"
 
     model = RentCar
-
-# class SearchResults(TemplateView):
-
-#     template_name = "rentapp/search_results.html"
 
 def search(request):
         if request.method == "POST":
             search = request.POST["search"]
+            if search != "":
+                tenant_first_name = Tenant.objects.filter(first_name__contains=search)
+                tenant_last_name = Tenant.objects.filter(last_name__contains=search)
+                tenant_email = Tenant.objects.filter(email__contains=search)
+                car_model = RentCar.objects.filter(car_model__contains=search)
+                place_location = RentPlace.objects.filter(location__contains=search)
 
-            tenant_first_name = Tenant.objects.filter(first_name__contains=search)
-            tenant_last_name = Tenant.objects.filter(last_name__contains=search)
-            tenant_email = Tenant.objects.filter(email__contains=search)
-            car_model = RentCar.objects.filter(car_model__contains=search)
-            place_location = RentPlace.objects.filter(location__contains=search)
+                searched = [
+                    tenant_first_name,
+                    tenant_last_name,
+                    tenant_email,
+                    car_model,
+                    place_location
+                ]
 
-            searched = [
-                tenant_first_name,
-                tenant_last_name,
-                tenant_email,
-                car_model,
-                place_location
-            ]
+            else:
+                searched = []
 
             context = {
                 "search":search,
@@ -111,15 +110,13 @@ def search(request):
 
             try:
                 for results in searched:
-                    print(results.exists())
                     if results.exists():
                         query = results
                         context["query"] = query
                         break
-                    else:
-                        query = f"No Available Results For {search}"
-                        context["query"] = query
-                        context["no_results"] = True
+                        # query = f"No Available Results For {search}"
+                        # context["query"] = query
+                        # context["no_results"] = True
             except:
                 return render (request, template_name="500.html")
             print(context)
