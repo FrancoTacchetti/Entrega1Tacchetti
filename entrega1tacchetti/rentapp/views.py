@@ -111,9 +111,11 @@ def search(request):
 
             try:
                 for results in searched:
+                    print(results.exists())
                     if results.exists():
                         query = results
                         context["query"] = query
+                        break
                     else:
                         query = f"No Available Results For {search}"
                         context["query"] = query

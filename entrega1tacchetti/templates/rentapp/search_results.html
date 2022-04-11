@@ -12,12 +12,18 @@
                 </div>
               {% endif %}
               
-              {% for result in query %} 
+              {% if no_results %}
                 <div class="article-metadata">
-                  <h2 class="article-content">{{ result }}</h2>
+                  <h2 class="article-content">{{ query }}</h2>
                 </div>
-              {% endfor %}
-              
+
+              {% else %}
+                {% for result in query %} 
+                  <div class="article-metadata">
+                    <h2 class="article-content">{{ result }}</h2>
+                  </div>
+                {% endfor %}
+              {% endif %}
 
 
           </div>
