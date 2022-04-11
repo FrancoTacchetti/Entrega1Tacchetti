@@ -1,0 +1,33 @@
+{% extends "rentapp/base.html" %}
+{% block content %}
+        <article class="media content-section">
+          <div class="media-body">
+              {% if search %}
+                <div class="article-metadata">
+                    <small class="text-muted">You Searched - {{ search }} </small>
+                </div>
+
+                {% if no_results %}
+                  <div class="article-metadata">
+                    <h2 class="article-content">{{ query }}</h2>
+                  </div>
+
+                {% else %}
+
+                  {% for result in query %} 
+                    <div class="article-metadata">
+                      <h2 class="article-content">{{ result.location }}</h2>
+                    </div>
+                  {% endfor %}
+
+                {% endif %}
+
+              {% else %}
+                <div class="article-metadata">
+                  <small class="text-muted">No Parameters Were Given For the Query...</small>
+                </div>
+              {% endif %}
+
+          </div>
+        </article>
+{% endblock content %}

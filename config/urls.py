@@ -10,7 +10,9 @@ from entrega1tacchetti.rentapp.views import (
     RentPlaceCreateView,
     TenantDetailView,
     PlaceDetailView,
-    CarDetailView)
+    CarDetailView,
+    # SearchResults,
+    search)
 
 urlpatterns = [
     path("", TemplateView.as_view(template_name="rentapp/base.html"), name="home"),
@@ -31,6 +33,15 @@ urlpatterns = [
     path( "tenant/<str:pk>/created", TenantDetailView.as_view(), name="tenant-cretion-detail"),
     path( "place/<str:pk>/created", PlaceDetailView.as_view(), name="place-cretion-detail"),
     path( "car/<str:pk>/created", CarDetailView.as_view(), name="car-cretion-detail"),
+
+    #Objects Detail View
+    path( "tenant/<str:pk>", TenantDetailView.as_view(), name="tenant-detail"),
+    path( "place/<str:pk>", PlaceDetailView.as_view(), name="place-detail"),
+    path( "car/<str:pk>", CarDetailView.as_view(), name="car-detail"),
+
+    #Search Results
+    path( "search_results", search, name="search-results"),
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
