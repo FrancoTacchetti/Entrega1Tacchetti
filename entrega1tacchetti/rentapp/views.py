@@ -83,38 +83,56 @@ class CarDetailView(DetailView,RentCarCreateView):
 
     model = RentCar
 
-def search(request):
+def filter_search(searched_query):
+
+    if searched_query != "":
+        tenant_first_name = Tenant.objects.filter(first_name__contains=searched_query)
+        tenant_last_name = Tenant.objects.filter(last_name__contains=searched_query)
+        tenant_email = Tenant.objects.filter(email__contains=searched_query)
+        car_model = RentCar.objects.filter(car_model__contains=searched_query)
+        place_location = RentPlace.objects.filter(location__contains=searched_query)
+
+        searched = [
+            tenant_first_name,
+            tenant_last_name,
+            tenant_email,
+            car_model,
+            place_location
+        ]
+
+    else:
+        searched = []
+    
+    return searched
+
+def search_results(request):
+
         if request.method == "POST":
             search = request.POST["search"]
-            if search != "":
-                tenant_first_name = Tenant.objects.filter(first_name__contains=search)
-                tenant_last_name = Tenant.objects.filter(last_name__contains=search)
-                tenant_email = Tenant.objects.filter(email__contains=search)
-                car_model = RentCar.objects.filter(car_model__contains=search)
-                place_location = RentPlace.objects.filter(location__contains=search)
-
-                searched = [
-                    tenant_first_name,
-                    tenant_last_name,
-                    tenant_email,
-                    car_model,
-                    place_location
-                ]
-
-            else:
-                searched = []
 
             context = {
-                "search":search,
-                "query": ""}
+            "search":search,
+            "query": ""}
+
+            searched = filter_search(search)
 
             try:
-                for results in searched:
+                for index, results in enumerate(searched):
                     if results.exists():
                         query = results
                         context["query"] = query
                         context["no_results"] = False
+                        #This Logic Needs To Be Improved
+                        #Logic Used Just to use one result view
+
+                        if index == 0 or index == 1 or index == 2:
+                            context["detail_view"] = "tenant-detail" 
+                        elif index == 3:
+                            context["detail_view"] = "car-detail" 
+                        else:
+                            context["detail_view"] = "place-detail" 
                         break
+
                     else:
                         query = f"No Available Results For {search}"
                         context["query"] = query
