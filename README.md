@@ -2,51 +2,37 @@
 
 Entrega Proyecto Para Curso Python CoderHouse
 
-[![Built with Cookiecutter Django](https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg?logo=cookiecutter)](https://github.com/cookiecutter/cookiecutter-django/)
-[![Black code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
+Entrega1Tacchetti/rentapp :
+- Contiene:
+    models.py
+    forms.py
+    views.py
 
-## Settings
+Entrega1Tacchetti/template/rentapp:
+- Contient todos los templates necesarios para la visualizacion de:
+    Creacion y Visualizacion de objectos en la DB:
+        - Tenant
+        - Rentable Car
+        - Rentable Place
 
-Moved to [settings](http://cookiecutter-django.readthedocs.io/en/latest/settings.html).
+Testing Flow:
 
-## Basic Commands
+- python manage.py runserver
+- Dirigirse al localhost especificado
+- Clickear en cada uno de los formularios para crear cada uno de los siguiente objectos:
+        - Tenant
+        - Rentable Car
+        - Rentable Place
+- Con cada creacion el usuario debe ser redirigido a la detail view de tal objeto en el que se especifica:
+    -la fecha de cracion y los datos de tal objeto
 
-### Setting Up Your Users
+- Clickear Home Button para ser redirigido a la vista principal
 
--   To create a **normal user account**, just go to Sign Up and fill out the form. Once you submit it, you'll see a "Verify Your E-mail Address" page. Go to your console to see a simulated email verification message. Copy the link into your browser. Now the user's email should be verified and ready to go.
+- Utilizar el buscador en el navbar:
+    - Especificar First Name or Last Name or Email para visualizar el Tenant Creado con esos datos (pueden buscar John)
+    - Especificar Place Location del Rent Place Creado para visualizar un Rentable Place (pueden buscar Bahía Blanca)
+    - Especificar el car model del Rentable Car para visualizar un Rentable Car (pueden buscar Subaru)
 
--   To create a **superuser account**, use this command:
+- Los resultados deben ser clickleables y redirigir a la Detail View del objeto especificado
+    
 
-        $ python manage.py createsuperuser
-
-For convenience, you can keep your normal user logged in on Chrome and your superuser logged in on Firefox (or similar), so that you can see how the site behaves for both kinds of users.
-
-### Type checks
-
-Running type checks with mypy:
-
-    $ mypy entrega1tacchetti
-
-### Test coverage
-
-To run the tests, check your test coverage, and generate an HTML coverage report:
-
-    $ coverage run -m pytest
-    $ coverage html
-    $ open htmlcov/index.html
-
-#### Running tests with pytest
-
-    $ pytest
-
-### Live reloading and Sass CSS compilation
-
-Moved to [Live reloading and SASS compilation](https://cookiecutter-django.readthedocs.io/en/latest/developing-locally.html#sass-compilation-live-reloading).
-
-## Deployment
-
-The following details how to deploy this application.
-
-### Heroku
-
-See detailed [cookiecutter-django Heroku documentation](http://cookiecutter-django.readthedocs.io/en/latest/deployment-on-heroku.html).
