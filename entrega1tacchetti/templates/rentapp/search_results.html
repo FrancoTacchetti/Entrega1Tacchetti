@@ -20,7 +20,17 @@
               {% else %}
                 {% for result in query %} 
                   <div class="article-metadata">
-                    <h2 class="article-content">{{ result }}</h2>
+                    
+                    {% if detail_view == "tenant-detail" %}
+                      <h2 class="article-content"><a href="{% url 'tenant-detail' result.uuid %}">{{ result }}</a></h2>
+
+                    {% elif detail_view == "car-detail" %}
+                      <h2 class="article-content"><a href="{% url 'car-detail' result.uuid %}">{{ result }}</a></h2>
+
+                    {% elif detail_view == "place-detail" %}
+                      <h2 class="article-content"><a href="{% url 'place-detail' result.uuid %}">{{ result }}</a></h2>
+                    
+                    {% endif %}
                   </div>
                 {% endfor %}
               {% endif %}
