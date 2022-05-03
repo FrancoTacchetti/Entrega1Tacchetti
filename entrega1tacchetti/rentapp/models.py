@@ -53,4 +53,4 @@ class RentPlace(models.Model):
     
     def get_absolute_url(self):
         return reverse("place-cretion-detail", kwargs={"pk": str(self.uuid)})
-
+    
