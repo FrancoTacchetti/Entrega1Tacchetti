@@ -1,17 +1,21 @@
 from pickle import FALSE
 from django.shortcuts import render
 from multiprocessing import context
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from django.views.generic import (
+    UpdateView,
     TemplateView,
     ListView, 
     CreateView,
-    DetailView)
+    DetailView,
+    DeleteView)
 
 from rentapp.models import (
     Tenant, 
     RentCar, 
-    RentPlace)
+    RentPlace,
+    Post)
 
 class FormsView():
 
@@ -142,4 +146,54 @@ def search_results(request):
             print(context)
         return render(request,"rentapp/search_results.html", context=context)
 
+class PostListView(ListView):
+    model = Post
+    template_name = "rentapp/base.html"
+    context_object_name = 'posts'
+    ordering = ['-date_posted']
+    paginate_by = 5
+
+class PostDetailView(DetailView):
+    model = Post
+    template_name = "rentapp/detail_views/post_detail_view.html"
+
+class PostCreateView(LoginRequiredMixin, CreateView):
+    model = Post
+    success_url = "/"
+    template_name = "rentapp/post_form.html"
+    fields = ['title', 'content']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Post
+    template_name = "rentapp/post_form.html"
+    fields = ['title', 'content']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
+
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Post
+    template_name = "rentapp/post_confirm_delete.html"
+    success_url = "/"
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
+
+
+# def about(request):
+#     return render(request, 'blog/about.html', {'title': 'About'})
 

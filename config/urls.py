@@ -5,16 +5,21 @@ from django.urls import include, path
 from django.views import defaults as default_views
 from django.views.generic import TemplateView
 from entrega1tacchetti.rentapp.views import (
+    PostDetailView,
+    PostListView,
     TenantCreateView, 
     RentCarCreateView, 
     RentPlaceCreateView,
     TenantDetailView,
     PlaceDetailView,
     CarDetailView,
-    search_results)
+    search_results,
+    PostCreateView,
+    PostUpdateView,
+    PostDeleteView)
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="rentapp/base.html"), name="home"),
+    path("", PostListView.as_view(), name="home"),
     path( "about/", TemplateView.as_view(template_name="rentapp/about.html"), name="about"),
     # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
@@ -40,7 +45,13 @@ urlpatterns = [
 
     #Search Results
     path( "search_results", search_results, name="search-results"),
-    
+
+    #Post Views
+    path( "post/<int:pk>", PostDetailView.as_view(), name="post-detail"),
+    path( "post/new", PostCreateView.as_view(), name="post-create"),
+    path( "post/<int:pk>/update", PostUpdateView.as_view(), name="post-update"),
+    path( "post/<int:pk>/delete", PostDeleteView.as_view(), name="post-delete"),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

@@ -2,6 +2,7 @@ import uuid
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
+from entrega1tacchetti.users.models import User
 
 class Tenant(models.Model):
     PAID_CHOICES = (
@@ -53,4 +54,15 @@ class RentPlace(models.Model):
     
     def get_absolute_url(self):
         return reverse("place-cretion-detail", kwargs={"pk": str(self.uuid)})
-    
+
+class Post(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    date_posted = models.DateTimeField(default=timezone.now)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('post-detail', kwargs={'pk': self.pk})
