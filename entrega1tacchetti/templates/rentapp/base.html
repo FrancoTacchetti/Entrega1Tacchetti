@@ -34,7 +34,7 @@
                 </li>
                 <li class="nav-item">
                   {# URL provided by django-allauth/account/urls.py #}
-                  <a class="nav-link" href="{% url 'users:detail' request.user.username  %}">My Profile</a>
+                  <a class="nav-link" href="{% url 'profile' %}">My Profile</a>
                 </li>
                 <li class="nav-item">
                   {# URL provided by django-allauth/account/urls.py #}
@@ -79,7 +79,12 @@
               <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
               <div class="media-body">
                 <div class="article-metadata">
-                  <a class="mr-2" href="#">{{ post.author }}</a>
+                {% if request.user.is_authenticated and request.user.username == post.author.username%}
+                  {# URL provided by django-allauth/account/urls.py #}
+                  <a class="mr-2" href="{% url 'profile' %}">{{ post.author }}</a>
+                {% else %}
+                  <a class="mr-2">{{ post.author }}</a>
+                {% endif %}
                   <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
                 </div>
                 <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>

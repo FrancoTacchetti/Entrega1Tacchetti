@@ -16,3 +16,7 @@ class CreateRouteTestCases(SimpleTestCase):
         url = reverse('rentable-car-create')
         self.assertEquals(resolve(url).route, 'car/new')
 
+    def test_create_rentable_car_route(self):
+        url = reverse('post-create')
+        self.assertEquals(resolve(url).route, 'post/new')
+

@@ -17,6 +17,7 @@ from entrega1tacchetti.rentapp.views import (
     PostCreateView,
     PostUpdateView,
     PostDeleteView)
+from entrega1tacchetti.users import views as user_views
 
 urlpatterns = [
     path("", PostListView.as_view(), name="home"),
@@ -24,6 +25,7 @@ urlpatterns = [
     # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
+    path('profile/', user_views.profile, name='profile'),
     path("users/", include("entrega1tacchetti.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here

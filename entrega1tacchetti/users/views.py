@@ -4,6 +4,10 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView, RedirectView, UpdateView
+from django.contrib.auth.decorators import login_required
+from .forms import UserUpdateForm,ProfileUpdateForm
+from django.shortcuts import render, redirect
+from django.contrib import messages
 
 User = get_user_model()
 
@@ -19,7 +23,7 @@ user_detail_view = UserDetailView.as_view()
 
 
 class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
-
+    template_name = 'users/user_detail.html'
     model = User
     fields = ["name"]
     success_message = _("Information successfully updated")
@@ -27,7 +31,7 @@ class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     def get_success_url(self):
         assert (
             self.request.user.is_authenticated
-        )  # for mypy to know that the user is authenticated
+        )
         return self.request.user.get_absolute_url()
 
     def get_object(self):
@@ -46,3 +50,27 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
 
 
 user_redirect_view = UserRedirectView.as_view()
+
+@login_required
+def profile(request):
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST,
+                                   request.FILES,
+                                   instance=request.user.profile)
+        if p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('/')
+
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+
+    return render(request, 'users/user_detail.html', context)

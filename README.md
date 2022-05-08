@@ -35,5 +35,7 @@ Testing Flow:
     - Especificar el car model del Rentable Car para visualizar un Rentable Car (pueden buscar Subaru)
 
 - Los resultados deben ser clickleables y redirigir a la Detail View del objeto especificado
+
+- rentapp/tests.py contiene cuatro casos de testeo. Para ejecutarlos ir a root del proyecto y en cmd correr "python.py manage.py test rentapp"
     
 
