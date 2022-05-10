@@ -28,6 +28,7 @@ urlpatterns = [
     path('profile/', user_views.profile, name='profile'),
     path("users/", include("entrega1tacchetti.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
+    path('register/', user_views.register, name='register'),
     # Your stuff: custom urls includes go here
     
     #Creation Forms Views
