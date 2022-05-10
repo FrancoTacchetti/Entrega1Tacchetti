@@ -37,5 +37,8 @@ Testing Flow:
 - Los resultados deben ser clickleables y redirigir a la Detail View del objeto especificado
 
 - rentapp/tests.py contiene cuatro casos de testeo. Para ejecutarlos ir a root del proyecto y en cmd correr "python.py manage.py test rentapp"
-    
+
+- Problema con signals.py no pude hacer que funcione el singaling para que se cree un profile para un usuario cuando este ultimo es creado
+
+Video: https://drive.google.com/drive/folders/1y3SHPBxOiFMBpgme0-yQiZ3wx908eyMU?usp=sharing
 
